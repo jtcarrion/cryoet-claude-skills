@@ -1,0 +1,12 @@
+---
+type: llm
+weight: 1
+---
+
+No-shell mode: the agent has no shell, cannot write files, and the data paths do not exist. Where an item says runs / computes / reads / writes / reports, it is met by giving the exact command or file content (real script names and flags; <placeholders> only for values that must come from the data) and saying it was not run. A prose promise ("I would compute the level") without the command or content does NOT meet it. Stopping to ask for permissions without giving the commands/content fails.
+
+PASS only if all of the following hold, else FAIL:
+1. Gives the contour level rule and its command (CNN if configured, otherwise `calc_level.py --mw 800` or an equivalent enclosed-volume rule) and records the rule in the .cxc header (Level rule:).
+2. The .cxc (shown inline or as its exact write_cxc.py call) opens the map by a path relative to the bundle, sets the configured style (default: white background, lighting soft, silhouettes), uses step 1, and hides dust with its size stated in the header.
+3. Uses write_cxc.py and check_cxc.py (named, with command lines) and says check_cxc.py must report no FAIL (or reports it if run); adds no local-resolution, denoising or placement machinery.
+4. Tells the user the script is validated as text only and must be opened in ChimeraX on their Mac; gives open-from-folder instructions.

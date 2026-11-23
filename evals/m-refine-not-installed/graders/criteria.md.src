@@ -1,0 +1,9 @@
+---
+type: llm
+weight: 1
+---
+
+PASS only if all of the following hold, else FAIL:
+1. Runs or describes the setup check (loads the config, `cryoet_have m`) and recognises M is not configured.
+2. Stops cleanly: tells the user Warp 2.0 (MTools/MCore) must be installed and WARP_ENV_SCRIPT set via the cryoet-workflow setup; does not search the filesystem for a Warp build or guess a path.
+3. Submits no job and writes no job script with a hardcoded MCore path.

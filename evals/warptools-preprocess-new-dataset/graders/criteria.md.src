@@ -1,0 +1,15 @@
+---
+type: llm
+---
+
+No-shell mode: the agent has no shell, cannot write files, and the data paths do not exist. Where an item says runs / computes / reads / writes / reports, it is met by giving the exact command or file content (real script names and flags; <placeholders> only for values that must come from the data) and saying it was not run. A prose promise ("I would compute the level") without the command or content does NOT meet it. Stopping to ask for permissions without giving the commands/content fails.
+
+Assume a cryoet-skills config exists with WARP_ENV_SCRIPT and IMOD_DIR set and SLURM_GPU_PARTITION set; the data paths may not exist in the sandbox. Judge the transcript and final answer. PASS only if ALL hold:
+1. Runs or gives the exact setup check (loads the config via the skill's _lib/cryoet_config.sh, `cryoet_have warp`/imod) before planning.
+2. Runs or gives the exact `inspect_mdoc.py` command on the MDOCs/frames and says pixel size, dose per tilt / per frame, voltage and Cs must come from the data and be confirmed with the user (does not invent values; asks for anything missing such as voltage).
+3. Passes the per-frame dose so that `--exposure` ends up NEGATIVE (e.g. DOSE_PER_FRAME given positive to init_project.sh, which negates it) and sets NFRAMES=12 (init_project.sh derives M_GRID 1x1x12) or M_GRID 1x1x12 explicitly (no silent 1x1x3).
+4. Mentions checking the gain orientation against the movie header, and the tilt-axis / transposed ImageSize check.
+5. Uses absolute paths and `init_project.sh --proj ...`; takes partition/account from the config (cryoet_submit / submit_chain.sh), with no hardcoded partition, typed gres or node name.
+6. Plans the chain with the hand check BEFORE ts_ctf and proposes a one-series smoke test (`--variant smoketest`) first.
+7. Submits no job.
+FAIL otherwise.

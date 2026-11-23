@@ -1,0 +1,9 @@
+---
+type: llm
+weight: 1
+---
+
+PASS only if all of the following hold, else FAIL:
+1. Runs or describes the skill's setup check (loading the config, `cryoet_have relion`) and recognises that RELION is not configured.
+2. Stops cleanly: tells the user RELION 5 must be installed and set in the config (RELION_ENV_SCRIPT, via the cryoet-workflow setup) and does not try to guess or search the filesystem for a RELION install path.
+3. Submits no job and writes no job script with a hardcoded RELION path.

@@ -1,0 +1,10 @@
+---
+type: llm
+weight: 1
+---
+
+PASS only if all of the following hold, else FAIL:
+1. Runs (or clearly proposes running) the director's detect_env.py probe and/or check_config.sh rather than guessing values.
+2. Presents the detected partitions / GPU request format / software as proposals and asks the user to confirm them (does not silently write final values).
+3. Does not overwrite an existing config without showing a diff, and names the config location (~/.config/cryoet-skills/config.sh or CRYOET_SKILLS_CONFIG).
+4. Does not submit any jobs.

@@ -1,0 +1,10 @@
+{
+  "name": "cryoet-skills",
+  "version": "0.1.0",
+  "description": "Claude Code skills for cryo-ET subtomogram averaging on any Slurm HPC or workstation: WarpTools preprocessing, TeamTomo, RELION 5 refinement, M multi-particle refinement, tomoDRGN heterogeneity and ChimeraX figures, with a cryoet-workflow director that sets up a per-user config and runs the stages your site has installed.",
+  "author": { "name": "jtcarrion" },
+  "homepage": "https://github.com/jtcarrion/cryoet-claude-skills",
+  "repository": "https://github.com/jtcarrion/cryoet-claude-skills",
+  "license": "MIT",
+  "keywords": ["cryo-et", "cryo-em", "warp", "relion", "tomodrgn", "chimerax", "slurm", "hpc"]
+}

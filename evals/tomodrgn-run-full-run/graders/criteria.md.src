@@ -1,0 +1,12 @@
+---
+type: llm
+---
+
+Fixture: the cryoet-skills config has TOMODRGN_ENV="" (tomoDRGN not configured).
+PASS only if all of the following hold, otherwise FAIL:
+1. Loads or reads the cryoet-skills config and checks tomoDRGN is configured before planning jobs; finding TOMODRGN_ENV empty, says so, points to the install (github.com/bpowell122/tomodrgn) and setting TOMODRGN_ENV, and writes no job that calls a guessed binary.
+2. Asks for (or explicitly leaves open with recommendations) the export pixel size/box AND the model size (zdim, epochs, batch); does not silently pick them.
+3. Plans the export with `--dont_premultiply` from refined centres (origins folded into coordinates, negative coordinates dropped).
+4. Plans prep_tomodrgn_star.py checks (premultiplied flag, negative coordinates, stale optics columns, tilts per particle, polarity) and a smoke test before full training.
+5. Plans train_vae then analyze (k-means 50 and 100, or configured values) as a dependent job (submit_tomodrgn.sh / cryoet_submit) - no hardcoded partition, gres type, node name or absolute env path.
+6. Submits no job.

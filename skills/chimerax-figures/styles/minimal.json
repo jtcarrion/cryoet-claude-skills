@@ -1,0 +1,7 @@
+{
+  "_doc": "Close to ChimeraX's own defaults: no silhouettes, simple lighting, white background. Useful when a journal or co-author wants a plain look.",
+  "background": "white",
+  "lighting": "simple",
+  "silhouettes": {"enabled": false},
+  "independent_rotation": false
+}

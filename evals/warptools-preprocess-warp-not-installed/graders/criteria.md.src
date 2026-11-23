@@ -1,0 +1,10 @@
+---
+type: llm
+---
+
+Fixture: the cryoet-skills config has WARP_ENV_SCRIPT empty, IMOD_DIR set and SCHEDULER="slurm" (a Slurm site), while the user says they are on a new workstation. WarpTools is not on PATH. Judge the transcript and final answer. PASS only if ALL hold:
+1. Runs or describes the setup check (`cryoet_have warp`, or reads the config file with no shell) and recognises WarpTools is not installed/configured.
+2. Tells the user what is needed: install WarpTools 2.0 (e.g. its conda package) and set WARP_ENV_SCRIPT (or put WarpTools on PATH) in the config (via the cryoet-workflow setup or by editing the key), plus IMOD (IMOD_DIR) or AreTomo3 for alignment.
+3. Notices the config describes a Slurm site although the user is on a workstation and asks which applies (SCHEDULER=none runs locally) rather than submitting to the configured partition.
+4. Stops cleanly: does not run init_project.sh / WarpTools steps or invent an install path, and does not substitute another tool silently. It may outline the plan for once installed (inspect_mdoc.py first) but submits/runs nothing.
+FAIL otherwise.

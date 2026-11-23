@@ -1,0 +1,15 @@
+---
+type: llm
+weight: 1
+---
+
+No-shell mode: the agent has no shell, cannot write files, and the data paths do not exist. Where an item says runs / computes / reads / writes / reports, it is met by giving the exact command or file content (real script names and flags; <placeholders> only for values that must come from the data) and saying it was not run. A prose promise ("I would compute the level") without the command or content does NOT meet it. Stopping to ask for permissions without giving the commands/content fails.
+
+PASS only if all of the following hold, else FAIL:
+1. Asks the user for (or explicitly leaves open with a recommendation) the export pixel size, box size and number of GPUs, instead of silently choosing them.
+2. Uses `--coords_angpix 10` / `COORDS_ANGPIX=10` for the input coordinates.
+3. Plans the export from a copy of the tilt-series XMLs / processing folder (not the live folder), with a one-series test before the full export.
+4. Includes a cross-half duplicate audit (dedup_audit.py) before refinement and builds its own absolute-path optimisation set (make_optset.py, run directly or by the export script).
+5. Submission commands go through `cryoet_submit` (or `cryoet_sbatch_args`) with resources from the config; no hardcoded partition name, typed GPU gres (e.g. gpu:a100:N) or node name. Commands with <placeholders> for values it could not read are acceptable if the placeholders are named.
+6. MPI ranks = GPUs + 1 (odd, >= 3).
+7. Submits no job.

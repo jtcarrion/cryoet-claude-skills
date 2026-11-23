@@ -1,0 +1,11 @@
+---
+type: llm
+weight: 1
+---
+
+PASS only if all of the following hold, else FAIL:
+1. Diagnoses a reference greyscale mismatch (external map not on the particles' intensity scale -> flat posteriors), and says it is not an I/O, scratch/preread or MPI-layout problem.
+2. Recommends `--firstiter_cc` (with `--scale`, e.g. EXTERNAL_REF=1) or an own-data reference, and does NOT recommend `--maxsig`.
+3. Recommends a short smoke test (bench_iter1 or equivalent: ~200 particles, one iteration) and says the diagnostic arm must run WITHOUT `--firstiter_cc` because CC mode makes every reference look perfect.
+4. Mentions checking the reference's hand (e.g. benchmarking the map and its Z-flip).
+5. Does not cancel or resubmit the user's job without asking.

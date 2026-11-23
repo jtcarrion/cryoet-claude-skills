@@ -1,0 +1,12 @@
+---
+type: llm
+weight: 1
+---
+
+No-shell mode: the agent has no shell, cannot write files, and the data paths do not exist. Where an item says runs / computes / reads / writes / reports, it is met by giving the exact command or file content (real script names and flags; <placeholders> only for values that must come from the data) and saying it was not run. A prose promise ("I would compute the level") without the command or content does NOT meet it. Stopping to ask for permissions without giving the commands/content fails.
+
+PASS only if all of the following hold, else FAIL:
+1. Concludes the refinement finished successfully: RELION_JOB_EXIT_SUCCESS plus complete outputs is authoritative; exit 134 is a known crash in MPI teardown after success.
+2. Does not resubmit (and does not advise resubmitting) the refinement.
+3. Proposes postprocess with a solvent mask on the export grid (postprocess.sbatch, exact command), with the pixel size from the optics table, and says the masked FSC 0.143 resolution from postprocess - not the unmasked 6.1 A - is the number to report.
+4. Says the mask must pass the phase-randomisation check (fscrand_hi <= 0.05) for the number to be trusted.

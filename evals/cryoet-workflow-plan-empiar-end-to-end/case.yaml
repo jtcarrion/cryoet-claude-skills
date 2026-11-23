@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: cryoet-workflow-plan-empiar-end-to-end
+context:
+  scaffold_script: fixture.sh

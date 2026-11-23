@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: tomodrgn-run-not-configured
+context:
+  scaffold_script: fixture.sh

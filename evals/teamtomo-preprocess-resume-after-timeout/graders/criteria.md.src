@@ -1,0 +1,11 @@
+---
+type: llm
+---
+
+Judge the transcript and final answer. PASS only if ALL hold:
+1. Uses the skill's status.py on the output root (built from every <series>/run.json) as the authoritative status, rather than batch_summary.csv.
+2. Explains that batch_summary.csv is written only when a batch reaches its end, so a killed job leaves no rows (empty is expected, not data loss).
+3. Explains that series left with status `running` were interrupted and will be redone, `done` ones are skipped.
+4. Resume = resubmit the SAME config.yaml with run_shards.sbatch via cryoet_submit (no hardcoded partition / typed gres), and warns NOT to use --overwrite (which redoes everything); suggests a new tag only if settings change.
+5. Does not submit a job.
+FAIL otherwise.

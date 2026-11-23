@@ -1,0 +1,10 @@
+---
+type: llm
+weight: 1
+---
+
+PASS only if all of the following hold, else FAIL:
+1. Uses EstimateWeights as a separate step before an MCore run (e.g. WEIGHTS="--resolve_items" in mcore_round's env file, or `EstimateWeights --population ... --source <source name> --resolve_items` followed by MCore), not an invented MCore flag.
+2. Notes it needs the per-series FSC files from a previous MCore round (refinement_temp/<source>) and that the gain is modest; keeps snapshot + RELION-mask measurement + cross-FSC guard (GUARD_REF, or legacy REF_MAP) for the round.
+3. Explains the port collision (MCore's REST port, default 14300) and that each job gets a per-job port (`--port $(cryoet_port)`, which mcore_round.sbatch passes automatically); does not hardcode a port in FLAGS. Noting the residual job-ID-modulo collision and a mitigation (free-port probe, or --exclusive as an option) is fine.
+4. Writes (or, with no write tool, shows in full) the round as an env file and submits nothing; no hardcoded partition, gres type or node name.

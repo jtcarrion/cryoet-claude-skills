@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: chimerax-figures-no-cnn-no-chimerax
+context:
+  scaffold_script: fixture.sh

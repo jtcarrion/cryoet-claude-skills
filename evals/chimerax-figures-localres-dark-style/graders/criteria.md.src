@@ -1,0 +1,12 @@
+---
+type: llm
+weight: 1
+---
+
+No-shell mode: the agent has no shell, cannot write files, and the data paths do not exist. Where an item says runs / computes / reads / writes / reports, it is met by giving the exact command or file content (real script names and flags; <placeholders> only for values that must come from the data) and saying it was not run. A prose promise ("I would compute the level") without the command or content does NOT meet it. Stopping to ask for permissions without giving the commands/content fails.
+
+PASS only if all of the following hold, else FAIL:
+1. Honours the style request through the style mechanism (publication-dark style, --style, or style_overrides: black background, silhouettes off) and does not drop dust hiding, step 1 or the computed level because of it; any check_cxc style deviations are WARN, not failures.
+2. Fills the local-resolution map outside the mask with fill_locres.py (exact command; original kept as *_raw, excluded from the bundle) and states colour outside the mask is extrapolated.
+3. The .cxc (inline or via its exact write_cxc.py call) opens the density and local-resolution map first, then hides and nests the local-resolution map (#2 -> #1.5) and colours with color sample on #!1 with explicit palette stops whose best end respects Nyquist (2 x 1.34 A = 2.68 A); ships a key and recolor.cxc.
+4. Says local-resolution statistics are quoted from the original, unfilled map, and gives the level rule and its calc_level.py command (or asks for the MW it needs).

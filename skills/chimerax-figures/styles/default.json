@@ -1,0 +1,16 @@
+{
+  "_doc": "House style used by write_cxc.py and checked (WARN only) by check_cxc.py. Select with CHIMERAX_STYLE=<name> or a path to a JSON file. Every key is optional; missing keys fall back to this file.",
+  "background": "white",
+  "lighting": "soft",
+  "silhouettes": {"enabled": true, "width": 1.5, "color": "black"},
+  "map_color": "#b4b4b4",
+  "overview_map_transparency": 0.65,
+  "dust_factor": 10,
+  "palette": {"name": "viridis", "colors": ["#fde725", "#addc30", "#5ec962", "#28ae80", "#21918c", "#2c728e", "#3b528b", "#472d7b", "#440154"]},
+  "key": {"pos": "0.40,0.06", "size": "0.2,0.03"},
+  "labels": {"ypos": 0.92, "size_few": 20, "size_many": 16, "color": "black"},
+  "models": {"nucleic_color": "burlywood", "protein_color": "lightsteelblue", "ligand_overview_color": "red", "ligand_overview_style": "sphere"},
+  "closeup": {"mesh_color": "#2f6fd6", "ligand_carbon": "magenta", "contact_carbon": "tan", "ligand_label_color": "black", "residue_label_color": "dimgray"},
+  "independent_rotation": true,
+  "ascii_labels": false
+}

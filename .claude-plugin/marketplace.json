@@ -1,0 +1,8 @@
+{
+  "name": "cryoet-tools",
+  "description": "Cryo-ET processing skills for Claude Code",
+  "owner": { "name": "jtcarrion" },
+  "plugins": [
+    { "name": "cryoet-skills", "source": "./", "description": "Cryo-ET subtomogram-averaging workflow skills (WarpTools, RELION 5, M, tomoDRGN, TeamTomo, ChimeraX)" }
+  ]
+}

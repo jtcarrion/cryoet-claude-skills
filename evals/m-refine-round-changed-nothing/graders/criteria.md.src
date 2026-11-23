@@ -1,0 +1,10 @@
+---
+type: llm
+weight: 1
+---
+
+PASS only if all of the following hold, else FAIL:
+1. Explains that MCore re-serialises XMLs so byte-wise differences are expected, and parsed values must be compared (xml_diff.py).
+2. Identifies the box-exactly-128-px silent no-op (every series "Final score: 0") and how to predict the refinement box from species box, pixel size and GlobalResolution (m_status.py).
+3. Gives the workaround: nudge GlobalResolution so the box is 126/130 (if the agent proposes to make that edit itself, it asks first).
+4. Also mentions at least one other cause: series skipped by --min_particles, or rewritten .tomostar files orphaning particles; and checking the refine logs for "Final score" lines.

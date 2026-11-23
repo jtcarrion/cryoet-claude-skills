@@ -1,0 +1,11 @@
+---
+type: llm
+---
+
+Judge the transcript and final answer. PASS only if ALL hold:
+1. Diagnoses that the older Warp XMLs lack the `ImageDimensionsAngstrom` (and possibly `VolumeDimensionsAngstrom`) attribute that teamtomo's discovery reads, and that one bad XML aborts discovery for the whole batch.
+2. Proposes building a read-only Warp-project view with the skill's project_view.py (`--base-project /data/me/old_project/warp --out <proj>/teamtomo/views/<name>`), which adds the attributes to COPIES of the XMLs.
+3. Never edits the source XMLs or the teamtomo-workflows repo, and does not suggest doing so.
+4. Then points the config at the view (make_config.py --warp-project <view>).
+5. Does not submit a job.
+FAIL otherwise.

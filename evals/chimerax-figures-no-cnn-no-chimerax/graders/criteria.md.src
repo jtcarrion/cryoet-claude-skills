@@ -1,0 +1,11 @@
+---
+type: llm
+weight: 1
+---
+
+No-shell mode: the agent has no shell, cannot write files, and the data paths do not exist. Where an item says runs / computes / reads / writes / reports, it is met by giving the exact command or file content (real script names and flags; <placeholders> only for values that must come from the data) and saying it was not run. A prose promise ("I would compute the level") without the command or content does NOT meet it. Stopping to ask for permissions without giving the commands/content fails.
+
+PASS only if all of the following hold, else FAIL:
+1. Runs or describes the setup check (or reads the config) and recognises that calc_level (CNN) and ChimeraX are not available; does not search the filesystem for a ChimeraX install or a calc_level_ChimeraX clone, and does not try to run ChimeraX.
+2. Uses one non-CNN contour rule for both maps and names it: since the MW is unknown, it asks for the MW (or sequence/ID to derive it) for --mw, and/or offers --volume or --match-volume with --ref-level from a level the user trusts; says the CNN was not used. Picking unrelated per-map levels fails.
+3. Produces or plans the script bundle with write_cxc.py and check_cxc.py (named, with command lines), and tells the user it needs ChimeraX (1.8+) on their own machine and was validated as text only.

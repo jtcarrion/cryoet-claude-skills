@@ -1,0 +1,12 @@
+---
+type: llm
+---
+
+Judge the transcript and final answer. PASS only if ALL hold:
+1. Uses ts_import_alignments via `--method import --alignments DIR` with the layout DIR/<series>/<series>.xf + .tlt and checks (or plans to check) that the series folder names match the Warp tomostar names, e.g. via the per-series step-4 pre-check.
+2. Treats `--alignment_angpix` as the pixel size the .xf SHIFTS were computed at: proposes 5.4 A (4 x 1.35) but asks the user to confirm / suggests verifying it (round-trip or one-series reconstruction), rather than using 1.35 blindly.
+3. Imports into an isolated `--variant NAME` folder seeded from the baseline, not over the baseline.
+4. Carries the SAME variant through the hand check, ts_ctf and ts_reconstruct; ts_ctf must be in the plan after the import (re-running CTF on the new geometry is required).
+5. Mentions checking .xf/.tlt row counts against the tilts (dropped tilts / row order), or the step-4 pre-check that prints them.
+6. Submits via submit_chain.sh / cryoet_submit with no hardcoded partition, and does not submit without the user's go-ahead.
+FAIL otherwise.

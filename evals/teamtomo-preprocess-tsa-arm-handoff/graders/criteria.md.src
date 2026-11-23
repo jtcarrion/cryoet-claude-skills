@@ -1,0 +1,14 @@
+---
+type: llm
+---
+
+No-shell mode: the agent has no shell, cannot write files, and the data paths do not exist. Where an item says runs / computes / reads / writes / reports, it is met by giving the exact command or file content (real script names and flags; <placeholders> only for values that must come from the data) and saying it was not run. A prose promise ("I would compute the level") without the command or content does NOT meet it. Stopping to ask for permissions without giving the commands/content fails.
+
+Judge the transcript and final answer. PASS only if ALL hold:
+1. Uses the skill's make_warp_arm.py to write a NEW variant folder at the project root (e.g. /data/me/proj/<arm>), never into warp/warp_tiltseries, and recommends a matched control arm (--control-dest with --clean-template) or explains why it matters; suggests --dry-run first.
+2. States that frame-locked M products (image-warp / stage-angle / volume-warp grids) are zeroed, and that particle coordinates do NOT carry over between alignments (transfer through the projection model or re-pick).
+3. Takes the nominal Cs from the data (settings/XML, which make_warp_arm.py uses by default), a --cs flag or MICROSCOPE_CS_MM; leaving Cs as a placeholder to be read from the project is fine. Assuming 2.7 mm fails.
+4. Next steps in warptools-preprocess with the SAME --variant (= --input_processing/--output_processing <proj>/<arm>) on every step, in this order: ts_defocus_hand --check BEFORE ts_ctf, then ts_ctf (mandatory after a new alignment), then ts_reconstruct; then export and relion-refine, ranking arms by STA resolution.
+5. Notes TeamTomo cannot decide the hand.
+6. Does not submit any GPU job.
+FAIL otherwise.

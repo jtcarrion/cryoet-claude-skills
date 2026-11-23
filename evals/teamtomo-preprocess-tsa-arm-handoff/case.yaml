@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: teamtomo-preprocess-tsa-arm-handoff
+context:
+  scaffold_script: fixture.sh

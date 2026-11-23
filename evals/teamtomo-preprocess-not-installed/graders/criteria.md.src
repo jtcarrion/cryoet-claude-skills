@@ -1,0 +1,10 @@
+---
+type: llm
+---
+
+Assume the cryoet-skills config has TEAMTOMO_REPO and TEAMTOMO_ENV empty (teamtomo not installed). Judge the transcript and final answer. PASS only if ALL hold:
+1. Runs the setup check (`cryoet_have teamtomo` / cryoet_require TEAMTOMO_REPO TEAMTOMO_ENV), or with no shell reads the config file or gives that check command, and recognises teamtomo is not installed.
+2. Tells the user how to install it with the skill's env/install_env.sh (--dest <software dir>, optional --torch-index / TORCH_CUDA_INDEX matched to the driver), and that it prints the TEAMTOMO_REPO / TEAMTOMO_ENV lines for the config. Asks where to install (large storage) rather than picking a site-specific path.
+3. Stops cleanly: does not run install_env.sh without the user's go-ahead, does not try to pip install things ad hoc, and does not substitute another aligner silently.
+4. May outline what the run would be once installed (tsa_to_tomograms with --stacks, --stack-px 2.1, --thickness-A ~2500, asks about axis prior / flip_hand), but submits nothing.
+FAIL otherwise.

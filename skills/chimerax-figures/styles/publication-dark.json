@@ -1,0 +1,9 @@
+{
+  "_doc": "Dark background for talks/posters. Same rules as default; only appearance changes.",
+  "background": "black",
+  "lighting": "full",
+  "silhouettes": {"enabled": true, "width": 1.5, "color": "black"},
+  "map_color": "#d9d9d9",
+  "labels": {"ypos": 0.92, "size_few": 20, "size_many": 16, "color": "white"},
+  "closeup": {"mesh_color": "#6fa8ff", "ligand_carbon": "magenta", "contact_carbon": "tan", "ligand_label_color": "white", "residue_label_color": "lightgray"}
+}

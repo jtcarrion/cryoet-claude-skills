@@ -1,0 +1,13 @@
+---
+type: llm
+weight: 1
+---
+
+No-shell mode: the agent has no shell, cannot write files, and the data paths do not exist. Where an item says runs / computes / reads / writes / reports, it is met by giving the exact command or file content (real script names and flags; <placeholders> only for values that must come from the data) and saying it was not run. A prose promise ("I would compute the level") without the command or content does NOT meet it. Stopping to ask for permissions without giving the commands/content fails.
+
+PASS only if all of the following hold, else FAIL:
+1. Inventories (or, with no file access, gives the exact inventory command and lists what it checks) both maps' pixel size, box, origin, hand and provenance before any script, and does not resample either map onto the other's grid.
+2. Uses one contour rule for both maps (calc_level.py --match-volume, --ref-level or --mw), not independent per-map levels.
+3. Says the hand must be decided against an atomic model (not map-vs-map correlation) and that the map, mask and local-resolution map are flipped on the same axis by array reversal (z in place_matrix.py), never the model.
+4. Explains that a rigid-body docking transform is needed (asks for it or explains the dock.json format / a ChimeraX volume flip + fitmap route) and that place_matrix.py gates det, orthonormality and correlation before any matrix is used; side-by-side offset goes into view matrix, no tile.
+5. Addresses comparability: denoises both from half-maps identically (Noise2Map if configured, asking before any GPU job) or states the processing difference; quotes FSC from the original maps.

@@ -1,0 +1,14 @@
+---
+type: llm
+---
+
+No-shell mode: the agent has no shell, cannot write files, and the data paths do not exist. Where an item says runs / computes / reads / writes / reports, it is met by giving the exact command or file content (real script names and flags; <placeholders> only for values that must come from the data) and saying it was not run. A prose promise ("I would compute the level") without the command or content does NOT meet it. Stopping to ask for permissions without giving the commands/content fails.
+
+Fixture: the cryoet-skills config at ~/.config/cryoet-skills/config.sh has TEAMTOMO_REPO and TEAMTOMO_ENV empty. Judge the transcript and final answer. PASS only if ALL hold:
+1. Does the setup check before anything else (sources cryoet_config.sh and checks `cryoet_have teamtomo`, or with no shell reads the config file) and, finding teamtomo not configured, says so and how to install it (env/install_env.sh) instead of improvising. Printing the check command without noticing the empty keys fails.
+2. Uses the Warp project `<proj>/warp` as `--warp-project` (not the bare project root, not a processing subfolder) and `--project-root /data/me/ribo_project`, so outputs go to `<proj>/teamtomo/xml_to_tomograms_<tag>/`.
+3. Uses (or gives the exact command for) make_config.py with workflow xml_to_tomograms and 10 A (`--recon-px 10`), and plan_shards.py --dry-run with 4 shards.
+4. The submit command uses `cryoet_submit gpu 4 <time> .../run_shards.sbatch <root>/config.yaml` (optionally with CRYOET_SBATCH_OPTS for -o/--cpus/--mem). It contains NO hardcoded partition name, NO typed gres (a GPU model name inside the gres string), and no node names.
+5. Recommends a one-series smoke test first.
+6. Does not submit any job (no sbatch / cryoet_submit actually executed).
+FAIL otherwise.

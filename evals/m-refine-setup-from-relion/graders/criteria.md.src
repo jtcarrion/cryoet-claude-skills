@@ -1,0 +1,14 @@
+---
+type: llm
+weight: 1
+---
+
+No-shell mode: the agent has no shell, cannot write files, and the data paths do not exist. Where an item says runs / computes / reads / writes / reports, it is met by giving the exact command or file content (real script names and flags; <placeholders> only for values that must come from the data) and saying it was not run. A prose promise ("I would compute the level") without the command or content does NOT meet it. Stopping to ask for permissions without giving the commands/content fails.
+
+PASS only if all of the following hold, else FAIL:
+1. Runs or describes the setup check (loads the cryoet-skills config, `cryoet_have m` / `cryoet_require CRYOET_PYTHON`, or reads the config file) and says it was not run if it could not be.
+2. Computes or states particle density (~500 particles per tilt series) and uses it to recommend a schedule (dense -> M-paper schedule, adding term groups one at a time after a plateau).
+3. Plans an ISOLATED population from a private copy of the XMLs with Cs / odd Zernikes reset (create_population.sbatch, whose RESET_SEED defaults to 1, or reset_ctf_cs.py), never pointing M at /data/me/proj/warp_tiltseries directly.
+4. Plans the binary mask from the postprocess map with an explicit molecular weight/volume, an MCore --iter 0 baseline, and re-measurement on the RELION soft mask with a cross-FSC guard reference (an external map of the same complex if available, else run_class001.mrc scored only below the RELION resolution).
+5. Writes (or, with no write tool, shows in full) the job settings as env files and shows a `cryoet_submit` line; no hardcoded partition, gres type, node name or absolute software path; nothing is submitted.
+6. Asks the user about GPUs/time and/or confirms the schedule before running.

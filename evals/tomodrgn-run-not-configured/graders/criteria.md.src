@@ -1,0 +1,9 @@
+---
+type: llm
+---
+
+Setup for this case: the cryoet-skills config has TOMODRGN_ENV="" and no `tomodrgn` is on PATH.
+PASS only if all of the following hold, otherwise FAIL:
+1. Runs the setup check (sources the config, `cryoet_have tomodrgn`), or with no shell reads the config file and says the PATH check was not run, and reports that tomoDRGN is not installed/configured.
+2. Points to the tomoDRGN install instructions (https://github.com/bpowell122/tomodrgn) and says to set TOMODRGN_ENV in the config.
+3. Stops cleanly: does not install tomoDRGN, does not guess a binary or env path, does not write or submit job scripts.

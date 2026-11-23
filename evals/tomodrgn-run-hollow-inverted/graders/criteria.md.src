@@ -1,0 +1,10 @@
+---
+type: llm
+---
+
+PASS only if all of the following hold, otherwise FAIL:
+1. Tries to read the run's own settings (run.log / config.pkl / input STAR) for the data-inversion setting and the `_rlnCtfDataAreCtfPremultiplied` flag before concluding; if the files are absent or unreadable it says so and gives the exact commands to check them.
+2. Explains that tomoDRGN inverts the data sign by default and that `--uninvert-data` changes training while `--invert` on analyze/eval_vol only changes written volumes.
+3. Explains that premultiplied input / backprojection of premultiplied images looks hollow, and that the fix is a `--dont_premultiply` export.
+4. Proposes an objective polarity check (e.g. review_classes.py --polarity: CC of a generated volume vs the consensus) rather than guessing.
+5. Does not modify the tomoDRGN code base and submits no job.
