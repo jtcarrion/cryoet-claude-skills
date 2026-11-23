@@ -28,21 +28,17 @@ plugin mode; the director falls back to general subagents).
 
 ## Running it
 
-**Login and launch.** Use your own Claude account, the normal way (`claude`, then `/login` the first time). No tokens
-or exports are needed. Launch Claude in your project directory on large storage, inside `tmux`/`screen`, so a long
-session survives disconnects. Claude itself is light; all heavy work is submitted to Slurm. If your site forbids
-long-running processes on login nodes, start Claude inside a small CPU allocation instead.
+**Login and launch.** Open Claude on the CLI the normal way (`claude` or `claude agents`) and simply ask 
+your Claude **"Please help me set up the cryo-ET skills"**.
 
-**First session: setup and intake.** Ask **"set up the cryo-ET skills"**. The `cryoet-workflow` skill probes your site
-(Slurm partitions, GPU request format, installed packages, a Python with numpy/scipy/mrcfile/matplotlib), asks you
-about a dozen questions, and writes `~/.config/cryoet-skills/config.sh`. Then **"what can I run here?"** shows which
-stages are available. Then **"new dataset: raw data in ..., MDOCs in ..., gain ..., project in ..."**: it reads the
-MDOCs, flags known traps (for example a tilt axis quoted 90 deg off), asks about your target, particles, reference and
-budget, and proposes a plan. The question set is in `skills/cryoet-workflow/references/intake.md`.
+**First session: setup and intake.** The `cryoet-workflow` skill probes your site 
+(Slurm partitions, GPU request format, installed packages, etc.), asks you simple questions about the data, 
+and writes it all inside `~/.config/cryoet-skills/config.sh`. 
+Note: Ask Claude **"what can I run here?"** to show which tools are supported. (Warp, RELION, TomoDRGN, M, TeamTomo, Chimerax)
 
-**Then one session per stage.** Approve a stage, let it submit, and leave. Come back in a **new** session and say
-**"resume the project in <dir>"**. The project record (`cryoet_project.json`) carries every decision, path and job id,
-so nothing is lost, and short sessions cost far less than one long one.
+**Then one session per stage.** Approve a stage, let it submit, and leave. If you come back in a **new** session, 
+just say **"resume the project in /path/to/dir"**. The project record (`cryoet_project.json`) carries every decision, path and job id,
+so nothing is lost, and short sessions cost far less than one long one!
 
 **What to expect** (end-to-end test, EMPIAR-10499, 6 tilt series, 2,813 ribosomes, raw movies to a 7.3 A M map):
 
